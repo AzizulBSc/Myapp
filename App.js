@@ -18,7 +18,7 @@ function App() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.heading}>Data</Text>
+      <Text style={styles.heading}>BWMRIAPP</Text>
       <FlatList
         data={data}
         keyExtractor={item => item.id.toString()}
