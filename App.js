@@ -1,11 +1,34 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, FlatList, StyleSheet } from 'react-native';
+import axios from 'axios';
 
-export default function App() {
+function App() {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    // Replace this URL with the API you want to fetch data from
+    axios
+      .get('https://bwmriapp.com/api/category')
+      .then(response => {
+        setData(response.data.data);
+      })
+      .catch(error => {
+        console.error('Error fetching data: ', error);
+      });
+  }, []);
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <Text style={styles.heading}>Data</Text>
+      <FlatList
+        data={data}
+        keyExtractor={item => item.id.toString()}
+        renderItem={({ item }) => (
+          <View style={styles.itemContainer}>
+            <Text style={styles.title}>Title: {item.name}</Text>
+            <Text style={styles.body}>ID: {item.id}</Text>
+          </View>
+        )}
+      />
     </View>
   );
 }
@@ -13,8 +36,27 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding: 16,
+    backgroundColor: '#f5f5f5',
+  },
+  heading: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 16,
+  },
+  itemContainer: {
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    padding: 16,
+    marginBottom: 16,
+    borderRadius: 8,
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  body: {
+    fontSize: 14,
   },
 });
+
+export default App;
