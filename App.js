@@ -1,7 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
 import axios from 'axios';
+// import { AppRegistry } from 'react-native';
 
+import {
+  MD3LightTheme as DefaultTheme,
+  PaperProvider,
+} from 'react-native-paper';
+import HomeScreen from './src/HomeScreen';
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: 'lightblue',
+    secondary: 'yellow',
+  },
+};
 function App() {
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -17,19 +31,22 @@ function App() {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.heading}>BWMRIAPP</Text>
-      <FlatList
-        data={data}
-        keyExtractor={item => item.id.toString()}
-        renderItem={({ item }) => (
-          <View style={styles.itemContainer}>
-            <Text style={styles.title}>Title: {item.name}</Text>
-            <Text style={styles.body}>ID: {item.id}</Text>
-          </View>
-        )}
-      />
-    </View>
+    <PaperProvider theme={theme}>
+      <HomeScreen />
+      {/* <View style={styles.container}>
+        <Text style={styles.heading}>BWMRIAPP</Text>
+        <FlatList
+          data={data}
+          keyExtractor={item => item.id.toString()}
+          renderItem={({ item }) => (
+            <View style={styles.itemContainer}>
+              <Text style={styles.title}>Title: {item.name}</Text>
+              <Text style={styles.body}>ID: {item.id}</Text>
+            </View>
+          )}
+        />
+      </View> */}
+    </PaperProvider>
   );
 }
 
