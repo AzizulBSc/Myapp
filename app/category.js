@@ -2,6 +2,7 @@ import { View, Text } from 'react-native';
 import { useState, useEffect, React } from 'react';
 import { Link, useLocalSearchParams, useRouter } from 'expo-router';
 import axios from 'axios';
+import 'expo-router/entry';
 import { ActivityIndicator, List } from 'react-native-paper';
 export default function category() {
   const { id } = useLocalSearchParams();
@@ -23,7 +24,7 @@ export default function category() {
           <Link
             href={{
               pathname: 'details',
-              params: { details1: category.details.details},
+              params: { id: category.id},
             }}
             asChild
           >
