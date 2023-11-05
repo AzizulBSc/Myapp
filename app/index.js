@@ -1,7 +1,9 @@
 import "expo-router/entry";
-import { useState, useEffect, React } from 'react';
+import { useState, useEffect, React,Image } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Pressable } from 'react-native';
 import { Card, Title, Icon, MD3Colors } from 'react-native-paper';
+const gomImg  = require('../assets/gom.png');
+const vuttaImg = require('../assets/vutta.png');
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/core';
 import { Link } from "expo-router";
@@ -46,15 +48,48 @@ const index = () => {
               params: { id: category.id },
             }}
             asChild
+            key={index}
           >
-              <Card key={index} style={styles.card}>
-                <Card.Content>
-                  <Icon source="camera" color={MD3Colors.error50} size={50} />
-                  <Title>{category.name}</Title>
-                </Card.Content>
-              </Card>
+            <Card style={styles.card}>
+              <Card.Content>
+                {category.name === 'গম' ? (
+                  <Icon source="star" color={MD3Colors.error50} size={50} />
+                ) : category.name === 'ভুট্টা' ? (
+                  <Icon source="heart" color={MD3Colors.error50} size={50} />
+                ) : (
+                  <Icon source="magnify" color={MD3Colors.error50} size={50} />
+                )}
+                <Title>{category.name}</Title>
+              </Card.Content>
+            </Card>
           </Link>
         ))}
+        <Link
+          href={{
+            pathname: 'contact',
+          }}
+          asChild
+        >
+          <Card  style={styles.card}>
+            <Card.Content>
+              <Icon source="phone" color={MD3Colors.error50} size={50} />
+              <Title>যোগাযোগ</Title>
+            </Card.Content>
+          </Card>
+        </Link>
+        <Link
+          href={{
+            pathname: 'faq',
+          }}
+          asChild
+        >
+          <Card style={styles.card}>
+            <Card.Content>
+              <Icon source="LIST" color={MD3Colors.error50} size={50} />
+              <Title>FAQ</Title>
+            </Card.Content>
+          </Card>
+        </Link>
       </View>
     </View>
   );
