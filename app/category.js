@@ -1,9 +1,10 @@
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { useState, useEffect, React } from 'react';
-import { Link, useLocalSearchParams, useRouter } from 'expo-router';
+import { Link, useLocalSearchParams } from 'expo-router';
 import axios from 'axios';
 import 'expo-router/entry';
 import { ActivityIndicator, List } from 'react-native-paper';
+import NetStatus from './NetStatus';
 export default function category() {
   const { id } = useLocalSearchParams();
   const [data, setData] = useState([]);
@@ -22,9 +23,10 @@ export default function category() {
       {data && data.sub_category ? (
         data.sub_category.map((category, index) => (
           <Link
+            key={index}
             href={{
               pathname: 'details',
-              params: { id: category.id},
+              params: { id: category.id },
             }}
             asChild
           >
@@ -34,6 +36,8 @@ export default function category() {
       ) : (
         <ActivityIndicator theme={{ colors: { primary: 'green' } }} />
       )}
+
+      <NetStatus />
     </View>
   );
 }

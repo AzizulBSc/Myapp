@@ -1,12 +1,18 @@
 import "expo-router/entry";
-import { useState, useEffect, React,Image } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Pressable } from 'react-native';
-import { Card, Title, Icon, MD3Colors } from 'react-native-paper';
-const gomImg  = require('../assets/gom.png');
-const vuttaImg = require('../assets/vutta.png');
+import { useState, useEffect, React } from 'react';
+import { View, StyleSheet, Text } from 'react-native';
+import NetStatus from './NetStatus';
+import {
+  Card,
+  Title,
+  Icon,
+  MD3Colors,
+  Provider as PaperProvider,
+  Appbar,
+} from 'react-native-paper';
 import axios from 'axios';
-import { useNavigation } from '@react-navigation/core';
 import { Link } from "expo-router";
+
 const index = () => {
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -20,16 +26,12 @@ const index = () => {
       });
   }, []);
   
-  // const navigation = useNavigation();
-  // const handleCategoryCardClick = category => {
-  //   navigation.navigate('home', { categoryId: category.id });
-  // };
 
   const styles = StyleSheet.create({
     container: {
       flexDirection: 'row',
       flexWrap: 'wrap',
-      justifyContent: 'space-between',
+      justifyContent: 'space-evenly',
       padding: 16,
     },
     card: {
@@ -39,7 +41,7 @@ const index = () => {
   });
 
   return (
-    <View>
+    <PaperProvider>
       <View style={styles.container}>
         {data.map((category, index) => (
           <Link
@@ -70,7 +72,7 @@ const index = () => {
           }}
           asChild
         >
-          <Card  style={styles.card}>
+          <Card style={styles.card}>
             <Card.Content>
               <Icon source="phone" color={MD3Colors.error50} size={50} />
               <Title>যোগাযোগ</Title>
@@ -85,13 +87,14 @@ const index = () => {
         >
           <Card style={styles.card}>
             <Card.Content>
-              <Icon source="LIST" color={MD3Colors.error50} size={50} />
+              <Icon source="camera" color={MD3Colors.error50} size={50} />
               <Title>FAQ</Title>
             </Card.Content>
           </Card>
         </Link>
       </View>
-    </View>
+      <NetStatus />
+    </PaperProvider>
   );
 };
 

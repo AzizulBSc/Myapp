@@ -1,18 +1,17 @@
-import { View, Text, H3, ScrollView } from 'react-native';
-import { useState, useEffect, React, useRef } from 'react';
-import { Link, useLocalSearchParams } from 'expo-router';
+import { View, Text,ScrollView } from 'react-native';
+import { useState, useEffect, React } from 'react';
+import { Link } from 'expo-router';
 import axios from 'axios';
 import HTML from 'react-native-render-html';
 import { useNavigation } from '@react-navigation/native';
 import { ActivityIndicator, List, Appbar, Card } from 'react-native-paper';
+import NetStatus from './NetStatus';
 export default function faq() {
   const navigation = useNavigation();
 
   const goBack = () => {
     navigation.goBack();
   };
-  const myRef = useRef(null);
-  const { id } = useLocalSearchParams();
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
@@ -26,7 +25,7 @@ export default function faq() {
   }, []);
   console.log(data);
   return (
-    <View ref={myRef}>
+    <View>
       {data ? (
         data.map(faq => (
           <Card key={faq.id}>
@@ -41,6 +40,8 @@ export default function faq() {
           <ActivityIndicator animating={true} color="green" />
         </View>
       )}
+
+      <NetStatus />
     </View>
   );
 }

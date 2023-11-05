@@ -5,6 +5,7 @@ import axios from 'axios';
 import HTML from 'react-native-render-html';
 import { useNavigation } from '@react-navigation/native';
 import { ActivityIndicator, Lis, Appbar } from 'react-native-paper';
+import NetStatus from './NetStatus';
 export default function details() {
 
    const navigation = useNavigation();
@@ -44,6 +45,8 @@ export default function details() {
       ) : (
         <ActivityIndicator theme={{ colors: { primary: 'green' } }} />
       )}
+
+      <NetStatus />
     </View>
   );
 }

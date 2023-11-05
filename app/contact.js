@@ -1,17 +1,17 @@
-import { View, Text, H3, ScrollView } from 'react-native';
-import { useState, useEffect, React, useRef } from 'react';
+import { View, ScrollView } from 'react-native';
+import { useState, useEffect, React } from 'react';
 import { Link, useLocalSearchParams } from 'expo-router';
 import axios from 'axios';
 import HTML from 'react-native-render-html';
 import { useNavigation } from '@react-navigation/native';
-import { ActivityIndicator, Lis, Appbar } from 'react-native-paper';
+import { ActivityIndicator, Appbar } from 'react-native-paper';
+import NetStatus from './NetStatus';
 export default function contact() {
   const navigation = useNavigation();
 
   const goBack = () => {
     navigation.goBack();
   };
-  const myRef = useRef(null);
   const { id } = useLocalSearchParams();
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -25,12 +25,12 @@ export default function contact() {
       });
   }, []);
   return (
-    <View ref={myRef}>
-      {data ? (
+    <View>
+      {data && data.details != null ? (
         <View>
           <Appbar.Header>
             <Appbar.BackAction onPress={goBack} />
-            <Appbar.Content title='Communication'/>
+            <Appbar.Content title="Communication" />
           </Appbar.Header>
           <ScrollView>
             <View
@@ -43,6 +43,8 @@ export default function contact() {
       ) : (
         <ActivityIndicator theme={{ colors: { primary: 'green' } }} />
       )}
+
+      <NetStatus />
     </View>
   );
 }
