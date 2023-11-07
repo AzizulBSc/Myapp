@@ -4,8 +4,9 @@ import { Link, useLocalSearchParams } from 'expo-router';
 import axios from 'axios';
 import HTML from 'react-native-render-html';
 import { useNavigation } from '@react-navigation/native';
-import { ActivityIndicator, Appbar } from 'react-native-paper';
+import { ActivityIndicator } from 'react-native-paper';
 import NetStatus from './NetStatus';
+import Appbar1 from './Appbar1';
 export default function contact() {
   const navigation = useNavigation();
 
@@ -26,12 +27,13 @@ export default function contact() {
   }, []);
   return (
     <View>
+      <Appbar1 title="Communication" />
       {data && data.details != null ? (
         <View>
-          <Appbar.Header>
+          {/* <Appbar.Header>
             <Appbar.BackAction onPress={goBack} />
             <Appbar.Content title="Communication" />
-          </Appbar.Header>
+          </Appbar.Header> */}
           <ScrollView>
             <View
               style={{ paddingLeft: 30, paddingRight: 30, paddingBottom: 120 }}

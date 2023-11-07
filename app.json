@@ -12,6 +12,12 @@
     "android": {
       "package": "com.bwmriapp"
     },
+    "icon": "./assets/icons/icon.png",
+    "splash": {
+      "image": "./assets/icons/icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
     "extra": {
       "router": {
         "origin": false

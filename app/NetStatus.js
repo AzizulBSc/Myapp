@@ -1,6 +1,8 @@
 import { useState, useEffect, React } from 'react';
 import NetInfo from '@react-native-community/netinfo';
 import { StyleSheet, Text } from 'react-native';
+import PopupMessage from './PopupMessage';
+import { View } from '@bacons/react-views';
 export default function NetStatus() {
   const [isOnline, setIsOnline] = useState(true);
 
@@ -13,18 +15,21 @@ export default function NetStatus() {
       unsubscribe();
     };
   }, []);
+
   const styles = StyleSheet.create({
     message: {
-      marginTop: 200,
-      paddingLeft: 30,
+      paddingTop: 505,
     },
   });
-  return (
-    <Text style={styles.message}>
-      You are{' '}
-      <Text style={{ color: isOnline ? 'green' : 'red' }}>
-        {isOnline ? 'online' : 'offline'}
-      </Text>
-    </Text>
+  return isOnline ? (
+    <View>
+      <View style={styles.message}>
+        <PopupMessage message="You are now Online" />
+      </View>
+    </View>
+  ) : (
+    <View style={styles.message}>
+      <PopupMessage message="You are Offline pleas Connect Internet or Wifi" />
+    </View>
   );
 }

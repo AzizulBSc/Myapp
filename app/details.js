@@ -1,11 +1,12 @@
-import { View, Text, H3, ScrollView } from 'react-native';
-import { useState, useEffect, React, useRef } from 'react';
+import { View, ScrollView } from 'react-native';
+import { useState, useEffect, React } from 'react';
 import { Link, useLocalSearchParams } from 'expo-router';
 import axios from 'axios';
 import HTML from 'react-native-render-html';
 import { useNavigation } from '@react-navigation/native';
-import { ActivityIndicator, Lis, Appbar } from 'react-native-paper';
+import { ActivityIndicator, List } from 'react-native-paper';
 import NetStatus from './NetStatus';
+import Appbar1 from './Appbar1';
 export default function details() {
 
    const navigation = useNavigation();
@@ -13,7 +14,6 @@ export default function details() {
    const goBack = () => {
      navigation.goBack();
    };
-  const myRef = useRef(null);
   const { id } = useLocalSearchParams();
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -27,13 +27,11 @@ export default function details() {
       });
   }, []);
   return (
-    <View ref={myRef}>
+    <View>
+      <Appbar1 title="Details" />
       {data ? (
         <View>
-          <Appbar.Header>
-            <Appbar.BackAction onPress={goBack} />
-            <Appbar.Content title={data?.data?.name} />
-          </Appbar.Header>
+          <Appbar1 />
           <ScrollView>
             <View
               style={{ paddingLeft: 30, paddingRight: 30, paddingBottom: 120 }}

@@ -1,17 +1,12 @@
-import { View, Text,ScrollView } from 'react-native';
+import { View, Text } from 'react-native';
 import { useState, useEffect, React } from 'react';
-import { Link } from 'expo-router';
 import axios from 'axios';
-import HTML from 'react-native-render-html';
 import { useNavigation } from '@react-navigation/native';
-import { ActivityIndicator, List, Appbar, Card } from 'react-native-paper';
+import { ActivityIndicator, List, Card } from 'react-native-paper';
 import NetStatus from './NetStatus';
+import Appbar1 from './Appbar1';
 export default function faq() {
-  const navigation = useNavigation();
-
-  const goBack = () => {
-    navigation.goBack();
-  };
+  
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
@@ -26,6 +21,7 @@ export default function faq() {
   console.log(data);
   return (
     <View>
+      <Appbar1 title='FAQ' />
       {data ? (
         data.map(faq => (
           <Card key={faq.id}>
