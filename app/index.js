@@ -1,6 +1,6 @@
 import "expo-router/entry";
-import { useState, useEffect, React } from 'react';
-import { View, StyleSheet,SafeAreaView } from 'react-native';
+import { useState, useEffect, React, useRef } from 'react';
+import { View, StyleSheet, SafeAreaView } from 'react-native';
 import NetStatus from './NetStatus';
 import {
   Card,
@@ -12,6 +12,9 @@ import axios from 'axios';
 import { Link } from "expo-router";
 
 const index = () => {
+
+
+  const ref = useRef(null);
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
@@ -42,13 +45,13 @@ const index = () => {
   });
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }} ref={ref}>
       <View style={styles.container}>
         {data.map((category, index) => (
           <Link
             href={{
               pathname: 'category',
-              params: { id: category.id },
+              params: { id: category.id, name: category.name },
             }}
             asChild
             key={index}
@@ -94,6 +97,19 @@ const index = () => {
             <Card.Content>
               <Icon source="camera" color={MD3Colors.OnPrimary} size={50} />
               <Title>FAQ</Title>
+            </Card.Content>
+          </Card>
+        </Link>
+        <Link
+          href={{
+            pathname: 'myprofile',
+          }}
+          asChild
+        >
+          <Card style={styles.card}>
+            <Card.Content>
+              <Icon source="account" color={MD3Colors.secondary} size={50} />
+              <Title style={{ fontSize: 14 }}>Developer</Title>
             </Card.Content>
           </Card>
         </Link>
