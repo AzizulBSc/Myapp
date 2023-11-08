@@ -1,19 +1,13 @@
-import "expo-router/entry";
+import 'expo-router/entry';
 import { useState, useEffect, React, useRef } from 'react';
 import { View, StyleSheet, SafeAreaView } from 'react-native';
 import NetStatus from './NetStatus';
-import {
-  Card,
-  Title,
-  Icon,
-  MD3Colors,
-} from 'react-native-paper';
+import { Card, Title, Icon, MD3Colors } from 'react-native-paper';
 import axios from 'axios';
-import { Link } from "expo-router";
+import { Link } from 'expo-router';
+import Loading from './Loading';
 
 const index = () => {
-
-
   const ref = useRef(null);
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -26,7 +20,6 @@ const index = () => {
         console.error('Error fetching data: ', error);
       });
   }, []);
-  
 
   const styles = StyleSheet.create({
     container: {
@@ -47,33 +40,43 @@ const index = () => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }} ref={ref}>
       <View style={styles.container}>
-        {data.map((category, index) => (
-          <Link
-            href={{
-              pathname: 'category',
-              params: { id: category.id, name: category.name },
-            }}
-            asChild
-            key={index}
-          >
-            <Card style={styles.card}>
-              <Card.Content>
-                {category.name === 'গম' ? (
-                  <Icon source="star" color={MD3Colors.OnPrimary} size={50} />
-                ) : category.name === 'ভুট্টা' ? (
-                  <Icon source="heart" color={MD3Colors.OnPrimary} size={50} />
-                ) : (
-                  <Icon
-                    source="magnify"
-                    color={MD3Colors.OnPrimary}
-                    size={50}
-                  />
-                )}
-                <Title>{category.name}</Title>
-              </Card.Content>
-            </Card>
+        {data ? (
+          data.map((category, index) => (
+            <Link
+              href={{
+                pathname: 'category',
+                params: { id: category.id, name: category.name },
+              }}
+              asChild
+              key={index}
+            >
+              <Card style={styles.card}>
+                <Card.Content>
+                  {category.name === 'গম' ? (
+                    <Icon source="star" color={MD3Colors.OnPrimary} size={50} />
+                  ) : category.name === 'ভুট্টা' ? (
+                    <Icon
+                      source="heart"
+                      color={MD3Colors.OnPrimary}
+                      size={50}
+                    />
+                  ) : (
+                    <Icon
+                      source="magnify"
+                      color={MD3Colors.OnPrimary}
+                      size={50}
+                    />
+                  )}
+                  <Title>{category.name}</Title>
+                </Card.Content>
+              </Card>
+            </Link>
+          ))
+        ) : (
+          <Link href="">
+            <Loading />
           </Link>
-        ))}
+        )}
         <Link
           href={{
             pathname: 'contact',
@@ -95,8 +98,8 @@ const index = () => {
         >
           <Card style={styles.card}>
             <Card.Content>
-              <Icon source="camera" color={MD3Colors.OnPrimary} size={50} />
-              <Title>FAQ</Title>
+              <Icon source="help" color={MD3Colors.OnPrimary} size={50} />
+              <Title>জিজ্ঞাসা</Title>
             </Card.Content>
           </Card>
         </Link>

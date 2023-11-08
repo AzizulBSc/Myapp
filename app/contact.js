@@ -1,15 +1,21 @@
-import { View, ScrollView, WebView } from 'react-native';
-import { useState, useEffect, React } from 'react';
+import { View, Text, H3, ScrollView } from 'react-native';
+import { useState, useEffect, React, useRef } from 'react';
 import { Link, useLocalSearchParams } from 'expo-router';
 import axios from 'axios';
 import HTML from 'react-native-render-html';
-import RenderHtml from 'react-native-render-html';
 import { useNavigation } from '@react-navigation/native';
-import { ActivityIndicator } from 'react-native-paper';
-import NetStatus from './NetStatus';
+import { ActivityIndicator, Lis, Appbar } from 'react-native-paper';
+
+  import ImageManipulator from 'react-native-image-manipulator';
+import Loading from './Loading';
 import Appbar1 from './Appbar1';
-import { SafeAreaView } from 'react-native-safe-area-context';
 export default function contact() {
+  const navigation = useNavigation();
+  const goBack = () => {
+    navigation.goBack();
+  };
+  const myRef = useRef(null);
+  const { id } = useLocalSearchParams();
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
@@ -21,29 +27,56 @@ export default function contact() {
         console.error('Error fetching data: ', error);
       });
   }, []);
+
+
+  // Parse the HTML content
+  const htmlContent = data?.details;
+
+  // Function to reduce image resolution
+  const reduceImageResolution = async (imageUrl) => {
+    try {
+      const manipResult = await ImageManipulator.manipulateAsync(
+        imageUrl,
+        [{ resize: { width: newWidth, height: newHeight } }],
+        { compress: 0.7, format: ImageManipulator.SaveFormat.JPEG }
+      );
+
+      return manipResult.uri;
+    } catch (error) {
+      console.error('Image manipulation error:', error);
+      return imageUrl; // Return the original image URL in case of an error
+    }
+  };
+
+  const renderers = {
+    // img: (htmlAttribs, children, convertedCSS, passProps) => {
+    //    const newImageUrl = reduceImageResolution(htmlAttribs.src);
+    //   if (htmlAttribs.src) {
+    //     // Reduce image resolution and replace the source
+       
+    //     return <Image source={{ uri: newImageUrl }} style={{ width: 180, height: 200 }} />;
+    //   }
+    //   return <Image source={{ uri: htmlAttribs.src }} style={{ width: 180, height: 200 }} />;
+    // },
+  };
+
+
+
+
   return (
-    <View>
+    <View ref={myRef}>
       <Appbar1 title="Communication" />
-      <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
-        {data && data.details != null ? (
-          <View>
-            <ScrollView>
-                  <View
-                    style={{
-                      paddingLeft: 30,
-                      paddingRight: 30,
-                      paddingBottom: 120,
-                    }}
-                  >
-                    <HTML source={{ html: data?.details }} />
-                  </View>
+      {data && data?.details != null ? (
+        <View>
+          <ScrollView>
+            <ScrollView horizontal={true}>
+              <View >
+                <HTML source={{ html: htmlContent }} renderers={renderers} />
+              </View>
             </ScrollView>
-          </View>
-        ) : (
-          <ActivityIndicator theme={{ colors: { primary: 'green' } }} />
-        )}
-        <NetStatus />
-      </SafeAreaView>
+          </ScrollView>
+        </View>
+      ) : (<Loading />)}
     </View>
   );
 }

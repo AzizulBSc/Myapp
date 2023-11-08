@@ -4,7 +4,7 @@ import { View, ActivityIndicator, StyleSheet } from 'react-native';
 export default function  Loading() {
   return (
     <View style={styles.container}>
-      <ActivityIndicator theme={{ colors: { primary: 'green' } }} />
+      <ActivityIndicator theme={{ color: 'green' }} />
     </View>
   );
 }
@@ -14,6 +14,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    paddingTop: '50%',
+    padding: '50%',
   },
 });

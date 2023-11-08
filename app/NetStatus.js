@@ -23,9 +23,9 @@ export default function NetStatus() {
   });
   return isOnline ? (
     <View>
-      <View style={styles.message}>
+      {/* <View style={styles.message}>
         <PopupMessage message="You are now Online" />
-      </View>
+      </View> */}
     </View>
   ) : (
     <View style={styles.message}>
