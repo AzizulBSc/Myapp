@@ -1,10 +1,10 @@
 import { View, Text } from 'react-native';
 import { useState, useEffect, React } from 'react';
 import axios from 'axios';
-import { useNavigation } from '@react-navigation/native';
-import { ActivityIndicator, List, Card } from 'react-native-paper';
+import { List, Card } from 'react-native-paper';
 import NetStatus from './NetStatus';
 import Appbar1 from './Appbar1';
+import Loading from './Loading';
 export default function faq() {
   
   const [data, setData] = useState([]);
@@ -21,20 +21,21 @@ export default function faq() {
   console.log(data);
   return (
     <View>
-      <Appbar1 title='FAQ' />
+      <Appbar1 title="FAQ" />
       {data ? (
         data.map(faq => (
-          <Card key={faq.id}>
-            <List.Item title={faq.question} />
-            <Text>{faq.ans}</Text>
+          <Card
+            key={faq.id}
+            style={{ marginTop: 20, backgroundColor: 'light' }}
+          >
+            <Card.Content style={{ paddingLeft: 50, paddingRight: 50 }}>
+              <List.Item title={faq.question} style={{ fontWeight: 'bold' }} />
+              <Text>{faq.ans}</Text>
+            </Card.Content>
           </Card>
         ))
       ) : (
-        <View
-          style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
-        >
-          <ActivityIndicator animating={true} color="green" />
-        </View>
+        <Loading />
       )}
 
       <NetStatus />
