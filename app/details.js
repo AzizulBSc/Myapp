@@ -7,6 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 import { ActivityIndicator, List } from 'react-native-paper';
 import NetStatus from './NetStatus';
 import Appbar1 from './Appbar1';
+import { SafeAreaView } from 'react-native-safe-area-context';
 export default function details() {
 
    const navigation = useNavigation();
@@ -29,22 +30,31 @@ export default function details() {
   return (
     <View>
       <Appbar1 title="Details" />
-      {data ? (
-        <View>
-          <Appbar1 />
-          <ScrollView>
-            <View
-              style={{ paddingLeft: 30, paddingRight: 30, paddingBottom: 120 }}
-            >
-              <HTML source={{ html: data?.data?.details?.details }} />
-            </View>
-          </ScrollView>
-        </View>
-      ) : (
-        <ActivityIndicator theme={{ colors: { primary: 'green' } }} />
-      )}
-
-      <NetStatus />
+      <SafeAreaView style={{ flex: 1, backgroundColor: 'white' }}>
+        {data ? (
+          <View>
+            {/* <ScrollView horizontal={true}> */}
+            <ScrollView>
+              <View
+                style={{
+                  // paddingLeft: 10,
+                  // paddingRight: 30,
+                  // paddingBottom: 120,
+                  width: '100%',
+                }}
+              >
+                <HTML
+                  source={{ html: data?.data?.details?.details }}
+                />
+              </View>
+              {/* </ScrollView> */}
+            </ScrollView>
+          </View>
+        ) : (
+          <ActivityIndicator theme={{ colors: { primary: 'green' } }} />
+        )}
+        <NetStatus />
+      </SafeAreaView>
     </View>
   );
 }

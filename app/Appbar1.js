@@ -9,7 +9,7 @@ export default function Appbar1({title}) {
    };
   return (
     <View>
-      <Appbar.Header>
+      <Appbar.Header style={{ backgroundColor:'skyblue' }}>
         <Appbar.BackAction onPress={goBack} />
         <Appbar.Content title={title?title:''} />
       </Appbar.Header>
