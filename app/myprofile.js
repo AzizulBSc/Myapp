@@ -34,12 +34,13 @@ const openGithubProfile = () => {
         <Card style={styles.card}>
           <Card.Cover
             source={{
-              uri: 'https://scontent.fdac1-1.fna.fbcdn.net/v/t39.30808-6/359516218_3162248257413735_3727146006429903365_n.png?stp=dst-png_s960x960&_nc_cat=111&ccb=1-7&_nc_sid=5f2048&_nc_eui2=AeGzrcOhE4L60bieJjv7ODYy-cTg0U2dqQb5xODRTZ2pBrtBtUml5Kz7MHKCZyBCCrpYIhov8ia7axPcAbBZsPYG&_nc_ohc=AqwW6FqIz0oAX_ZR9_Z&_nc_zt=23&_nc_ht=scontent.fdac1-1.fna&oh=00_AfCcXUdOao98sRhvhkMIP6cfp_puia8mZPsLdrBT7Gq2uA&oe=654F877A',
+              uri: 'https://fastly.picsum.photos/id/160/600/300.jpg?hmac=KxJup50ARvwfn07Rknl6q7LlbhwkC20csDwNjXaSxiE',
             }}
           />
           <Card.Content>
             <Avatar.Image
               size={80}
+              // source={require('../assets/images/my1.png')}
               source={{
                 uri: 'https://lh3.googleusercontent.com/a/ACg8ocITyOat4DUsVCC3MMwi19AK2K3oP1wFPsoLaCT-hKKqB5s=s288-c-no',
               }}
