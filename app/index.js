@@ -116,6 +116,19 @@ const index = () => {
             </Card.Content>
           </Card>
         </Link>
+        <Link
+          href={{
+            pathname: 'CameraScreen',
+          }}
+          asChild
+        >
+          <Card style={styles.card}>
+            <Card.Content>
+              <Icon source="camera" color={MD3Colors.secondary} size={50} />
+              <Title style={{ fontSize: 14 }}>Camera</Title>
+            </Card.Content>
+          </Card>
+        </Link>
       </View>
       <NetStatus />
     </SafeAreaView>

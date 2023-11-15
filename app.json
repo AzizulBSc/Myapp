@@ -10,7 +10,12 @@
     "name": "Bwmri",
     "slug": "bwmri",
     "android": {
-      "package": "com.bwmriapp"
+      "package": "com.bwmriapp",
+      "permissions": [
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ]
     },
     "icon": "./assets/icons/icon.png",
     "splash": {
